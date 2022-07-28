@@ -1,0 +1,11 @@
+<a href="{% url 'inventario:productoCreate'%}">Agregar Producto</a> 
+<div>
+{% for producto in object_list %}
+    {{producto.nombre}} 
+    {{producto.precioUnidad}} 
+    {{producto.cantidadExistencia}} 
+    {{producto.IVAproducto}}
+    <a href="{% url 'inventario:productoUpdate' producto.id%}">Actualizar Producto</a> 
+    <a href="{% url 'inventario:productoDelete' producto.id%}">Eliminar Producto</a>
+    <div>
+{% endfor %}
