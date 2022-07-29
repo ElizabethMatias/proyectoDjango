@@ -1,8 +1,38 @@
-<a href="{% url 'inventario:ventaCreate'%}">Agregar Venta</a> 
-<div>
-{% for venta in object_list %}
-    {{venta}} 
-    <a href="{% url 'inventario:ventaUpdate' venta.id%}">Actualizar Venta</a> 
-    <a href="{% url 'inventario:ventaDelete' venta.id%}">Eliminar Venta</a>
-    <div>
-{% endfor %}
+{% extends 'inventario/base.html' %}
+
+{% block content %}
+<div class="ag">    
+    <a href="{% url 'inventario:ventaCreate'%}">Agregar Venta</a>  
+</div>
+    <table>
+        <thead>
+          <tr>
+            <th>Producto vendido</th>
+            <th>Unidades vendidas</th>
+            <th>Fecha de venta</th>
+            <th>Tipo de pago</th>
+            <th>Subtotal</th>
+            <th>IVA Total</th>
+            <th>Total</th>
+            <th>Vendedor</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for venta in object_list %}
+            <tr>
+                <td>{{venta.id_producto.nombre}} </td>
+                <td>{{venta.unidadesVendidas}} </td>
+                <td>{{venta.fecha}}</td>
+                <td>{{venta.get_tipoPago_display}}</td>
+                <td>{{venta.subTotal}}</td>
+                <td>{{venta.IVAtotal}} </td>
+                <td>{{venta.total}} </td>
+                <td>{{venta.vendedor}} </td>
+                <td><a class="actu" href="{% url 'inventario:ventaUpdate' venta.id%}">Actualizar</a>
+                    <a class="eli" href="{% url 'inventario:ventaDelete' venta.id%}">Eliminar</a> </td>
+            </tr>
+            {% endfor %}   
+        </tbody> 
+    </table>
+{% endblock content %}
