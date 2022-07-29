@@ -1,5 +1,5 @@
 <form action="{% url 'inventario:productoDelete' object.id %}" method="POST">
     {% csrf_token %}
-    ¿Desea eliminar el examen "{{exam.name}}"?
+    ¿Desea eliminar el producto?
     <button type="submit">Eliminar</button>
 </form>

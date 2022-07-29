@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from datetime import datetime
 from django.template import loader
-from .models import Producto
-from .forms import productoForm
+from .models import Producto,Venta
+from .forms import productoForm,ventaForm
 from django.views.generic import View,TemplateView,CreateView,ListView,UpdateView,DeleteView
 from django.urls import reverse_lazy,reverse
 
@@ -72,6 +72,8 @@ class homeTemplate(TemplateView):
 # class productoList(TemplateView):
 #    template_name = "inventario/productos.html"
 
+#Modelo Producto
+
 class productoCreate(CreateView):
   model=Producto
   template_name='inventario/productoCreate.html'
@@ -94,4 +96,29 @@ class productoDelete(DeleteView):
    context_object_name='producto'
    template_name='inventario/productoDelete.html'
    success_url=reverse_lazy('inventario:productoList')
+
+
+#Modeleo Ventas
+class ventaCreate(CreateView):
+  model=Venta
+  template_name='inventario/ventaCreate.html'
+  form_class=ventaForm
+  success_url=reverse_lazy('inventario:ventaList')
+
+class ventaList(ListView):
+  model=Venta
+  template_name='inventario/ventas.html'
+  form_class=ventaForm
+
+class ventaUpdate(UpdateView):
+    model=Venta
+    template_name='inventario/ventaUpdate.html'
+    form_class=ventaForm
+    success_url = reverse_lazy('inventario:ventaList')
+
+class ventaDelete(DeleteView):
+   model=Venta
+   context_object_name='venta'
+   template_name='inventario/ventaDelete.html'
+   success_url=reverse_lazy('inventario:ventaList')
 

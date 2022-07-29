@@ -10,6 +10,8 @@ class Producto(models.Model):
 
 
 class Venta(models.Model):
+    id_producto=models.ForeignKey(Producto,on_delete=models.CASCADE,null=False,blank=False,default=1)
+    unidadesVendidas = models.IntegerField(default=1)
     fecha = models.DateTimeField('fecha de venta')
     CHOICE = (
         ('EF', 'Efectivo'),
@@ -24,10 +26,3 @@ class Venta(models.Model):
     vendedor = models.CharField(max_length=200)
     IVAtotal = models.DecimalField(default=0, max_digits=7, decimal_places=2)
     total = models.DecimalField(default=0, max_digits=7, decimal_places=2)
-
-class VentaProducto(models.Model):
-    unidadesTotales = models.IntegerField(default=1)
-    precioUnidades = models.DecimalField(default=0, max_digits=7, decimal_places=2)
-    IVAtotal = models.DecimalField(default=0,max_digits=7, decimal_places=2)
-    venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)

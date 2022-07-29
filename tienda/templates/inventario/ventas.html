@@ -1,0 +1,8 @@
+<a href="{% url 'inventario:ventaCreate'%}">Agregar Venta</a> 
+<div>
+{% for venta in object_list %}
+    {{venta}} 
+    <a href="{% url 'inventario:ventaUpdate' venta.id%}">Actualizar Venta</a> 
+    <a href="{% url 'inventario:ventaDelete' venta.id%}">Eliminar Venta</a>
+    <div>
+{% endfor %}
