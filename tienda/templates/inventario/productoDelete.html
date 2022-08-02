@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'inventario/base.html' %}
 
 {% block content %}
@@ -9,4 +10,14 @@
 <div class="ag">
     <a href="{% url 'inventario:productoList'%}">Regresar</a>  
 </div> 
+=======
+{% extends 'inventario/base.html' %}
+
+{% block content %}
+<form action="{% url 'inventario:productoDelete' object.id %}" method="POST">
+    {% csrf_token %}
+    ¿Desea eliminar el producto?
+    <button type="submit">Eliminar</button>
+</form>
+>>>>>>> bfd0fd8f2d503f90e6e40e21fe3c00e4dfb37008
 {% endblock %}
