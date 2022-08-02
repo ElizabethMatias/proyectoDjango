@@ -1,11 +1,38 @@
-<a href="{% url 'inventario:productoCreate'%}">Agregar Producto</a> 
-<div>
-{% for producto in object_list %}
-    {{producto.nombre}} 
-    {{producto.precioUnidad}} 
-    {{producto.cantidadExistencia}} 
-    {{producto.IVAproducto}}
-    <a href="{% url 'inventario:productoUpdate' producto.id%}">Actualizar Producto</a> 
-    <a href="{% url 'inventario:productoDelete' producto.id%}">Eliminar Producto</a>
-    <div>
-{% endfor %}
+{% extends 'inventario/base.html' %}
+
+{% block content %}
+    <div class="ag">    
+        <a href="{% url 'inventario:productoCreate'%}">Agregar Producto</a> 
+    </div>
+    {% if object_list%}
+        <table>   
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio Unitario</th>
+                <th>IVA</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for producto in object_list %}
+                <tr>
+                    <td>{{producto.nombre}} </td>
+                    <td>{{producto.precioUnidad}}</td>
+                    <td>{{producto.IVAproducto}}</td>
+                    <td>{{producto.cantidadExistencia}} </td>
+                    <td><a class="actu" href="{% url 'inventario:productoUpdate' producto.id%}">Actualizar</a>
+                        <a class="eli" href="{% url 'inventario:productoDelete' producto.id%}">Eliminar</a> </td>
+                </tr>
+                {% endfor %}
+            </tbody>          
+        </table>
+    {% else %}
+        <h1 >Noy hay producto registrados</h1>
+    {% endif %}
+        <div class="ag">
+            <a href="{% url 'inventario:homeTemplate'%}">Regresar</a>  
+        </div> 
+    
+{% endblock %}

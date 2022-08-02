@@ -8,6 +8,14 @@ class Producto(models.Model):
     cantidadExistencia = models.IntegerField(default=0)
     IVAproducto = models.DecimalField(default=0, max_digits=7, decimal_places=2)
 
+#aplicacion de inventario
+#Registramos en Views.py 
+    #from .models import Producto
+#python mmanage.py makemigrations inventario
+#python mmanage.py migrate inventario
+#registrar en admin.py
+    #from .models import Producto
+    #admin.site.register(Producto)
 
 class Venta(models.Model):
     id_producto=models.ForeignKey(Producto,on_delete=models.CASCADE,null=False,blank=False,default=1)

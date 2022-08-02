@@ -6,8 +6,8 @@ class productoForm(forms.ModelForm):
   class Meta:
     model 	= Producto
     fields  =  '__all__' 
-  
+
 class ventaForm(forms.ModelForm):
-  class Meta:
-    model 	= Venta
-    fields  =  '__all__' 
+ class Meta:
+   model   = Venta
+   fields  =  '__all__'

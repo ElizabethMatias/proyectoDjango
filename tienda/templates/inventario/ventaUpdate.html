@@ -1,5 +1,12 @@
-<form action="{% url 'inventario:productoUpdate' object.id%}" method="POST" enctype="multipart/form-data">
+{% extends 'inventario/base.html' %}
+
+{% block content %}
+<form action="{% url 'inventario:ventaUpdate' object.id%}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <button type="submit">Actualizar</button>
 </form>
+<div class="ag">
+    <a href="{% url 'inventario:ventaList'%}">Regresar</a>  
+</div> 
+{% endblock content %}

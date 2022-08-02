@@ -1,5 +1,12 @@
+{% extends 'inventario/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
 <form action="{% url 'inventario:ventaCreate'%}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <button type="submit">Crear</button>
 </form>
+<div class="ag">
+    <a href="{% url 'inventario:ventaList'%}">Regresar</a>  
+</div> 
+{% endblock %}
