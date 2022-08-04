@@ -1,7 +1,7 @@
 from django.urls import path
 from inventario.views import (claseIndex,
 claseProductos,homeTemplate,
-productoList,productoCreate,productoUpdate,productoDelete,
+productoList,productoCreate,productoUpdate,productoDelete, search,
 ventaList,ventaCreate,ventaUpdate,ventaDelete)
 
 app_name='inventario'
@@ -14,8 +14,9 @@ urlpatterns = [
     path('productoCreate/',productoCreate.as_view(),name='productoCreate'),  
     path('productoUpdate/<int:pk>',productoUpdate.as_view(),name='productoUpdate'),
     path('productoDelete/<int:pk>',productoDelete.as_view(),name='productoDelete'),
-    path('ventaList/',ventaList.as_view(),name='ventaList'),
+    path('ventaList/',ventaList,name='ventaList'),
     path('ventaCreate/',ventaCreate.as_view(),name='ventaCreate'),
     path('ventaUpdate/<int:pk>',ventaUpdate.as_view(),name='ventaUpdate'),
     path('ventaDelete/<int:pk>',ventaDelete.as_view(),name='ventaDelete'),
+    path('search',search,name='search'),
 ]

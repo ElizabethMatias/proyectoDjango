@@ -1,4 +1,6 @@
+from statistics import mode
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -31,6 +33,6 @@ class Venta(models.Model):
         max_length=200,
     )
     subTotal = models.DecimalField(default=0, max_digits=7, decimal_places=2)
-    vendedor = models.CharField(max_length=200)
+    vendedor = models.ForeignKey(User,on_delete=models.CASCADE,null=False,blank=False,default=1)
     IVAtotal = models.DecimalField(default=0, max_digits=7, decimal_places=2)
     total = models.DecimalField(default=0, max_digits=7, decimal_places=2)

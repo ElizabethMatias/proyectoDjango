@@ -1,0 +1,14 @@
+{% extends 'inventario/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="POST">
+        {%csrf_token%}
+        {{ form|crispy }}
+        <button type="submit">Update</button>
+    </form>
+    <div class="ag">
+        <a href="{% url 'inventario:homeTemplate'%}">Regresar</a>  
+    </div> 
+
+{% endblock %}

@@ -1,10 +1,20 @@
 {% extends 'inventario/base.html' %}
-
+{%load static%}
 {% block content %}
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script type="text/javascript" src="{% static 'js/ajax.js'%}"><script> {% endcomment %}
+<div id="inventario">
     <div class="ag">    
         <a href="{% url 'inventario:productoCreate'%}">Agregar Producto</a> 
     </div>
-    {% if object_list%}
+    {% if object_list %}
+    <div class="modal fade" 
+      id="modal" 
+      tabindex="-1" 
+      role="dialog" 
+      aria-labelledby="exampleModalLabel" 
+      aria-hidden="true">
+    </div>
         <table>   
             <thead>
               <tr>
@@ -22,7 +32,10 @@
                     <td>{{producto.precioUnidad}}</td>
                     <td>{{producto.IVAproducto}}</td>
                     <td>{{producto.cantidadExistencia}} </td>
-                    <td><a class="actu" href="{% url 'inventario:productoUpdate' producto.id%}">Actualizar</a>
+                    <td><a class="actu" 
+                        href='{% url 'inventario:productoUpdate' producto.id %}'
+                        class="mr-1 btn btn-primary">
+                        <i class="far fa-edit"></i>Actualizar</button>
                         <a class="eli" href="{% url 'inventario:productoDelete' producto.id%}">Eliminar</a> </td>
                 </tr>
                 {% endfor %}
@@ -34,35 +47,9 @@
         <div class="ag">
             <a href="{% url 'inventario:homeTemplate'%}">Regresar</a>  
         </div> 
-    
-{% extends 'inventario/base.html' %}
 
-{% block content %}
-    <div class="ag">    
-        <a href="{% url 'inventario:productoCreate'%}">Agregar Producto</a> 
-    </div>
-        <table>
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Precio Unitario</th>
-                <th>IVA</th>
-                <th>Stock</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for producto in object_list %}
-                <tr>
-                    <td>{{producto.nombre}} </td>
-                    <td>{{producto.precioUnidad}}</td>
-                    <td>{{producto.IVAproducto}}</td>
-                    <td>{{producto.cantidadExistencia}} </td>
-                    <td><a class="actu" href="{% url 'inventario:productoUpdate' producto.id%}">Actualizar</a>
-                        <a class="eli" href="{% url 'inventario:productoDelete' producto.id%}">Eliminar</a> </td>
-                </tr>
-                {% endfor %}   
-            </tbody> 
-        </table>
-    
+</div> 
+
 {% endblock %}
+
+

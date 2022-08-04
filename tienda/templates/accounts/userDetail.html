@@ -1,0 +1,14 @@
+{% extends 'inventario/base.html' %}
+
+{% block content %}
+    {%if object%}
+        {{object.username}}
+        {{object.first_name}}
+        {{object.last_name}}
+    {%else%}
+        <p>no existe el usuario</p>
+    {% endif %}
+    <div class="ag">
+        <a href="{% url 'inventario:homeTemplate'%}">Regresar</a>  
+    </div> 
+{% endblock %}

@@ -10,4 +10,12 @@ class productoForm(forms.ModelForm):
 class ventaForm(forms.ModelForm):
  class Meta:
    model   = Venta
-   fields  =  '__all__'
+   fields  = [ 'id_producto',
+          'unidadesVendidas',
+          'fecha',
+          'tipoPago',
+          'subTotal',
+          'IVAtotal',
+          'total',
+   ]
+

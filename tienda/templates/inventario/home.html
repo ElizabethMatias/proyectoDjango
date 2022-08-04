@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 {% extends 'inventario/base.html' %}
 
 {% block content %}
 <div style="background-color:#8df1ec;padding:15px;text-align:center;">
-    <h1>Bienvenido al sistema de inventario</h1>
+    <h1> {{user.username}} Bienvenido al sistema de inventario</h1>
 </div>
 
 <div class="right">
@@ -14,21 +13,4 @@
     <h2><a href="{% url 'inventario:ventaList'%}">Ventas</a></h2>
 </div>
         
-=======
-{% extends 'inventario/base.html' %}
-
-{% block content %}
-<div style="background-color:#8df1ec;padding:15px;text-align:center;">
-    <h1>Bienvenido al sistema de inventario</h1>
-</div>
-
-<div class="right">
-    <h2><a href="{% url 'inventario:productoList'%}">Productos</a></h2>
-</div>
-
-<div class="left">
-    <h2><a href="{% url 'inventario:ventaList'%}">Ventas</a></h2>
-</div>
-        
->>>>>>> bfd0fd8f2d503f90e6e40e21fe3c00e4dfb37008
 {% endblock %}

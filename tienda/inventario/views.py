@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from django.template import loader
 from .models import Producto,Venta
+from django.contrib.auth.models import User
 from .forms import productoForm,ventaForm
 from django.views.generic import View,TemplateView,CreateView,ListView,UpdateView,DeleteView
 from django.urls import reverse_lazy,reverse
@@ -42,7 +43,7 @@ class productoList(ListView):
  model=Producto
  template_name='inventario/productos.html'
  form_class=productoForm
- 
+
 class productoCreate(CreateView):
  model=Producto
  template_name='inventario/productoCreate.html'
@@ -63,24 +64,52 @@ class productoDelete(DeleteView):
 
 #Modeleo Ventas
 class ventaCreate(CreateView):
- model=Venta
- template_name='inventario/ventaCreate.html'
- form_class=ventaForm
- success_url=reverse_lazy('inventario:ventaList')
+    model=Venta
+    template_name='inventario/ventaCreate.html'
+    form_class=ventaForm
+    success_url=reverse_lazy('inventario:ventaList')
 
-class ventaList(ListView):
- model=Venta
- template_name='inventario/ventas.html'
- form_class=ventaForm
+    def form_valid(self, form):
+        form.instance.vendedor=self.request.user
+        return super().form_valid(form)
+
+        
+# class ventaList(ListView):
+#     model=Venta
+#     template_name='inventario/ventas.html'
+#     form_class=ventaForm
+#     context_object_name='ventas'
+#     def get_form_kwargs(self):
+#         kwargs=super(ventaList, self).get_form_kwargs()
+#         kwargs['vendedor']=self.request.user
+#         return kwargs
+
+def ventaList(request):
+    context = {}
+    context['ventas'] = Venta.objects.filter(vendedor=request.user)
+    return render(request, 'inventario/ventas.html', context)
 
 class ventaUpdate(UpdateView):
-   model=Venta
-   template_name='inventario/ventaUpdate.html'
-   form_class=ventaForm
-   success_url = reverse_lazy('inventario:ventaList')
+    model=Venta
+    template_name='inventario/ventaUpdate.html'
+    form_class=ventaForm
+    success_url = reverse_lazy('inventario:ventaList')
 
 class ventaDelete(DeleteView):
-  model=Venta
-  context_object_name='venta'
-  template_name='inventario/ventaDelete.html'
-  success_url=reverse_lazy('inventario:ventaList')
+    model=Venta
+    context_object_name='venta'
+    template_name='inventario/ventaDelete.html'
+    success_url=reverse_lazy('accounts:login')
+
+import json
+def search(request):
+    slug= request.GET.get('nombre')
+    print(slug)
+    productos=Producto.objects.filter(nombre=slug)
+    print(productos)
+    productos=[producto_serializer(productos) for productos in productos]
+    print(productos)
+    return render(request,'inventario/productos.html',context=json.dumps(productos),content_type='application/json')
+
+def producto_serializer(producto):
+    return {'nombre':producto.nombre}
